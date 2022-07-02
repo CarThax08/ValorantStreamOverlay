@@ -1,0 +1,133 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <Version>2.0.0.1</Version>
+    <Company>RumbleMike</Company>
+    <Description>C# Program that offers an overlay for content creators.</Description>
+    <Copyright />
+    <PackageIcon>icon.png</PackageIcon>
+    <RepositoryUrl>https://github.com/RumbleMike/ValorantStreamOverlay</RepositoryUrl>
+    <PackageReleaseNotes>https://github.com/RumbleMike/ValorantStreamOverlay/releases/latest</PackageReleaseNotes>
+    <AssemblyVersion>2.0.0.2</AssemblyVersion>
+    <FileVersion>2.0.0.2</FileVersion>
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>test.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Anton-Regular.ttf" />
+    <None Remove="Resources\TX_CompetitiveTierMovement_Demoted.png" />
+    <None Remove="Resources\TX_CompetitiveTierMovement_MajorDecrease.png" />
+    <None Remove="Resources\TX_CompetitiveTierMovement_MajorIncrease.png" />
+    <None Remove="Resources\TX_CompetitiveTierMovement_MediumDecrease.png" />
+    <None Remove="Resources\TX_CompetitiveTierMovement_MinorDecrease.png" />
+    <None Remove="Resources\TX_CompetitiveTierMovement_MinorIncrease.png" />
+    <None Remove="Resources\TX_CompetitiveTierMovement_Promoted.png" />
+    <None Remove="Resources\TX_CompetitiveTierMovement_Stable.png" />
+    <None Remove="Resources\TX_CompetitiveTier_Large_0.png" />
+    <None Remove="Resources\TX_CompetitiveTier_Large_1.png" />
+    <None Remove="Resources\TX_CompetitiveTier_Large_10.png" />
+    <None Remove="Resources\TX_CompetitiveTier_Large_11.png" />
+    <None Remove="Resources\TX_CompetitiveTier_Large_12.png" />
+    <None Remove="Resources\TX_CompetitiveTier_Large_13.png" />
+    <None Remove="Resources\TX_CompetitiveTier_Large_14.png" />
+    <None Remove="Resources\TX_CompetitiveTier_Large_15.png" />
+    <None Remove="Resources\TX_CompetitiveTier_Large_16.png" />
+    <None Remove="Resources\TX_CompetitiveTier_Large_17.png" />
+    <None Remove="Resources\TX_CompetitiveTier_Large_18.png" />
+    <None Remove="Resources\TX_CompetitiveTier_Large_19.png" />
+    <None Remove="Resources\TX_CompetitiveTier_Large_2.png" />
+    <None Remove="Resources\TX_CompetitiveTier_Large_20.png" />
+    <None Remove="Resources\TX_CompetitiveTier_Large_21.png" />
+    <None Remove="Resources\TX_CompetitiveTier_Large_22.png" />
+    <None Remove="Resources\TX_CompetitiveTier_Large_23.png" />
+    <None Remove="Resources\TX_CompetitiveTier_Large_24.png" />
+    <None Remove="Resources\TX_CompetitiveTier_Large_3.png" />
+    <None Remove="Resources\TX_CompetitiveTier_Large_4.png" />
+    <None Remove="Resources\TX_CompetitiveTier_Large_5.png" />
+    <None Remove="Resources\TX_CompetitiveTier_Large_6.png" />
+    <None Remove="Resources\TX_CompetitiveTier_Large_7.png" />
+    <None Remove="Resources\TX_CompetitiveTier_Large_8.png" />
+    <None Remove="Resources\TX_CompetitiveTier_Large_9.png" />
+    <None Include="..\..\..\Desktop\Val_Overlay\icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autoupdater.NET.Official" Version="1.6.4" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="RestSharp" Version="106.11.7" />
+    <PackageReference Include="TwitchLib" Version="3.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Anton-Regular.ttf" />
+    <Resource Include="Resources\TX_CompetitiveTierMovement_Demoted.png" />
+    <Resource Include="Resources\TX_CompetitiveTierMovement_MajorDecrease.png" />
+    <Resource Include="Resources\TX_CompetitiveTierMovement_MajorIncrease.png" />
+    <Resource Include="Resources\TX_CompetitiveTierMovement_MediumDecrease.png" />
+    <Resource Include="Resources\TX_CompetitiveTierMovement_MinorDecrease.png" />
+    <Resource Include="Resources\TX_CompetitiveTierMovement_MinorIncrease.png" />
+    <Resource Include="Resources\TX_CompetitiveTierMovement_Promoted.png" />
+    <Resource Include="Resources\TX_CompetitiveTierMovement_Stable.png" />
+    <Resource Include="Resources\TX_CompetitiveTier_Large_0.png" />
+    <Resource Include="Resources\TX_CompetitiveTier_Large_1.png" />
+    <Resource Include="Resources\TX_CompetitiveTier_Large_10.png" />
+    <Resource Include="Resources\TX_CompetitiveTier_Large_11.png" />
+    <Resource Include="Resources\TX_CompetitiveTier_Large_12.png" />
+    <Resource Include="Resources\TX_CompetitiveTier_Large_13.png" />
+    <Resource Include="Resources\TX_CompetitiveTier_Large_14.png" />
+    <Resource Include="Resources\TX_CompetitiveTier_Large_15.png" />
+    <Resource Include="Resources\TX_CompetitiveTier_Large_16.png" />
+    <Resource Include="Resources\TX_CompetitiveTier_Large_17.png" />
+    <Resource Include="Resources\TX_CompetitiveTier_Large_18.png" />
+    <Resource Include="Resources\TX_CompetitiveTier_Large_19.png" />
+    <Resource Include="Resources\TX_CompetitiveTier_Large_2.png" />
+    <Resource Include="Resources\TX_CompetitiveTier_Large_20.png" />
+    <Resource Include="Resources\TX_CompetitiveTier_Large_21.png" />
+    <Resource Include="Resources\TX_CompetitiveTier_Large_22.png" />
+    <Resource Include="Resources\TX_CompetitiveTier_Large_23.png" />
+    <Resource Include="Resources\TX_CompetitiveTier_Large_24.png" />
+    <Resource Include="Resources\TX_CompetitiveTier_Large_3.png" />
+    <Resource Include="Resources\TX_CompetitiveTier_Large_4.png" />
+    <Resource Include="Resources\TX_CompetitiveTier_Large_5.png" />
+    <Resource Include="Resources\TX_CompetitiveTier_Large_6.png" />
+    <Resource Include="Resources\TX_CompetitiveTier_Large_7.png" />
+    <Resource Include="Resources\TX_CompetitiveTier_Large_8.png" />
+    <Resource Include="Resources\TX_CompetitiveTier_Large_9.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+</Project>
