@@ -30,7 +30,5 @@ Some External Packages were used to create this project with ease and implement 
 When you first launch the program, right click and select settings. Select your region and input your valorant name in the top text box and your valorant tagline in the one under that. Hit apply and relaunch the program.
 
 
-[![Watch the video](https://i.imgur.com/ZPAafXu.png)](https://youtu.be/cP3Ly3-4kSI)
-
 # Message For Riot
 Hey Riot, so I know that you are probably reading this since you guys love me so much on twitter on @Valorleaks (love you back). Regardless, if this program is not something you want out there, please message me through twitter (@RumbleMikee). Otherwise, this program is not injecting or modifying the game in any sort of way. It is simply just making a webrequest to your API which then returns a json that I parse and display. Thanks <3
