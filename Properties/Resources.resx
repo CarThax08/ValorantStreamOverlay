@@ -244,4 +244,13 @@
   <data name="TX_CompetitiveTier_Large_9" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TX_CompetitiveTier_Large_9.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="TX_CompetitiveTier_Large_25" xml:space="preserve">
+    <value>{C:\Users\demon\Downloads\ValorantStreamOverlay-main\ValorantStreamOverlay-main\Resources\TX_CompetitiveTier_Large_25.png}</value>
+  </data>
+  <data name="TX_CompetitiveTIer_Large_26" xml:space="preserve">
+    <value>{C:\Users\demon\Downloads\ValorantStreamOverlay-main\ValorantStreamOverlay-main\Resources\TX_CompetitiveTier_Large_26.png}</value>
+  </data>
+  <data name="TX_CompetitiveTier_Large_27" xml:space="preserve">
+    <value>{C:\Users\demon\Downloads\ValorantStreamOverlay-main\ValorantStreamOverlay-main\Resources\TX_CompetitiveTier_Large_27.png}</value>
+  </data>
 </root>

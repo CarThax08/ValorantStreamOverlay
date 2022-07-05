@@ -52,7 +52,7 @@ namespace ValorantStreamOverlay
             // 
             this.usernameTextBox.Location = new System.Drawing.Point(23, 11);
             this.usernameTextBox.Name = "usernameTextBox";
-            this.usernameTextBox.PlaceholderText = "Riot Games Username";
+            this.usernameTextBox.PlaceholderText = "Valorant Name";
             this.usernameTextBox.Size = new System.Drawing.Size(199, 23);
             this.usernameTextBox.TabIndex = 0;
             // 
@@ -81,11 +81,9 @@ namespace ValorantStreamOverlay
             // 
             this.passwordTextBox.Location = new System.Drawing.Point(23, 40);
             this.passwordTextBox.Name = "passwordTextBox";
-            this.passwordTextBox.PasswordChar = '*';
-            this.passwordTextBox.PlaceholderText = "Riot Games Password";
+            this.passwordTextBox.PlaceholderText = "Valorant Tag";
             this.passwordTextBox.Size = new System.Drawing.Size(199, 23);
             this.passwordTextBox.TabIndex = 3;
-            this.passwordTextBox.UseSystemPasswordChar = true;
             // 
             // regionDrop
             // 

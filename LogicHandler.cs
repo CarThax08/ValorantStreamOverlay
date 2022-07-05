@@ -20,11 +20,11 @@ namespace ValorantStreamOverlay
 
     class LogicHandler
     {
-        public static string AccessToken { get; set; }
+        public static string AccessToken = "JJQ8rTaTXlb5Cwi3Hio9tIXemADCjZhCLvnYt4Tj0g";
         public static string EntitlementToken { get; set; }
         public static string UserID { get; set; }
 
-        public static string username, password, region;
+        public static string riotname, riottag, region;
         public static int refreshTimeinSeconds;
         public Timer relogTimer, pointTimer;
 
@@ -52,14 +52,14 @@ namespace ValorantStreamOverlay
                 MessageBox.Show("Welcome, You have to set your username and password in the settings menu");
             else
             {
-                username = Properties.Settings.Default.username;
-                password = Properties.Settings.Default.password;
+                riotname = Properties.Settings.Default.username;
+                riottag = Properties.Settings.Default.password;
                 region = new SettingsParser().ReadRegion(Properties.Settings.Default.region).GetAwaiter().GetResult();
                 refreshTimeinSeconds = new SettingsParser().ReadDelay(Properties.Settings.Default.region).GetAwaiter().GetResult();
                 new SettingsParser().ReadSkin(Properties.Settings.Default.skin).GetAwaiter();
                 botEnabled = new SettingsParser().ReadTwitchBot().GetAwaiter().GetResult();
 
-                RiotGamesLogin();
+                //RiotGamesLogin();
 
                 UpdateToLatestGames();
                 new RankDetection();
@@ -72,29 +72,39 @@ namespace ValorantStreamOverlay
         }
 
 
-        void RiotGamesLogin()
+        /*void RiotGamesLogin()
         {
             try
             {
-                CookieContainer cookie = new CookieContainer();
-                Authentication.GetAuthorization(cookie);
+                RestClient client = new RestClient("https://auth.riotgames.com/api/v1");
+                client.Options.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip | DecompressionMethods.Brotli;
+                client.Options.CookieContainer = new CookieContainer();
+                //Cookie cookie = new Cookie();
+                //cookie.Name = "__cf_bm";
+                //cookie.Value =
+                   // "Y8uyu4ZbvLeOjyuhgUqAj5TZi5ycABrULjzGPx91ep4-1657026438-0-AT5KLhCXsAytHtw/0OLmtHz33njLOZXmliB+d7hB46bNKLr9DujptX6x4taRZyVdFjwfZmdKGhhWNmIkVr/w00A=";
+                //cookie.HttpOnly = true;
+                //cookie.Domain = "riotgames.com";
+                //client.CookieContainer.Add(cookie);
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls13;
+                Authentication.GetAuthorization(client);
 
-                var authJson = JsonConvert.DeserializeObject(Authentication.Authenticate(cookie, username, password));
+                var authJson = JsonConvert.DeserializeObject(Authentication.Authenticate(client, username, password));
                 JToken authObj = JObject.FromObject(authJson);
-
+                Console.WriteLine(1);
                 if (authObj.ToString().Contains("error"))
                 {
                     // error time lmfao
-                    MessageBox.Show("Login is Incorrect, please fix login in settings.");
+                    MessageBox.Show("Login Failed! Response from server was " + authObj);
                 }
                 else
                 {
+                    Console.WriteLine(2);
                     string authURL = authObj["response"]["parameters"]["uri"].Value<string>();
                     var access_tokenVar = Regex.Match(authURL, @"access_token=(.+?)&scope=").Groups[1].Value;
                     AccessToken = $"{access_tokenVar}";
-
-                    RestClient client = new RestClient(new Uri("https://entitlements.auth.riotgames.com/api/token/v1"));
-                    RestRequest request = new RestRequest(Method.POST);
+                    
+                    RestRequest request = new RestRequest("https://entitlements.auth.riotgames.com/api/token/v1", Method.Post);
 
                     request.AddHeader("Authorization", $"Bearer {AccessToken}");
                     request.AddJsonBody("{}");
@@ -105,14 +115,13 @@ namespace ValorantStreamOverlay
 
                     EntitlementToken = entitlement_tokenObj["entitlements_token"].Value<string>();
 
-
-                    RestClient userid_client = new RestClient(new Uri("https://auth.riotgames.com/userinfo"));
-                    RestRequest userid_request = new RestRequest(Method.POST);
+                    
+                    RestRequest userid_request = new RestRequest("https://auth.riotgames.com/userinfo", Method.Post);
 
                     userid_request.AddHeader("Authorization", $"Bearer {AccessToken}");
                     userid_request.AddJsonBody("{}");
 
-                    string userid_response = userid_client.Execute(userid_request).Content;
+                    string userid_response = client.Execute(userid_request).Content;
                     dynamic userid = JsonConvert.DeserializeObject(userid_response);
                     JToken useridObj = JObject.FromObject(userid);
 
@@ -127,60 +136,27 @@ namespace ValorantStreamOverlay
             }
             catch (Exception e)
             {
-                MessageBox.Show("Your Login was invalid, please check your settings.");
+                MessageBox.Show("Login Failed! Threw exception " + e.Message + " from class " + e.Source);
+                Console.WriteLine(e.StackTrace);
             }
         }
-
+*/
 
 
         async Task UpdateToLatestGames()
         {
+            
             Trace.Write("UPDATING");
             dynamic response = GetCompApiAsync().GetAwaiter().GetResult();
             if (response != null)
             {
-                int[] points = new int[3];
-                dynamic matches = response["Matches"];
-                int count = 0, i  = 0;
-                foreach (var game in matches)
-                {
-
-                    if (game["TierAfterUpdate"] == 0)
-                    {
-                        // riot said fuck off to this one i guess LMAO
-                    }
-                    else if (game["TierAfterUpdate"] > game["TierBeforeUpdate"]) // Promoted meaning, that afterupdate is more than beforeupdate
-                    {
-                        // player promoted
-                        int before = game["RankedRatingBeforeUpdate"];
-                        int after = game["RankedRatingAfterUpdate"];
-                        int differ = (after - before) + 100; 
-                        points[i++] = differ;
-                        count++;
-                    }
-                    else if (game["TierAfterUpdate"] < game["TierBeforeUpdate"])
-                    {
-                        // player demoted
-                        int before = game["RankedRatingBeforeUpdate"];
-                        int after = game["RankedRatingAfterUpdate"];
-                        int differ = (after - before) - 100; 
-                        points[i++] = differ;
-                        count++;
-                    }
-                    else
-                    {
-                        int before = game["RankedRatingBeforeUpdate"];
-                        int after = game["RankedRatingAfterUpdate"];
-                        points[i++] = after - before;
-                        count++;
-                    }
-
-                    if (count >= 3) // 3 recent matches found
-                        break;
-                }
+                int lastMatchPoints = response["data"]["mmr_change_to_last_game"];
+                int pointsInRank = response["data"]["ranking_in_tier"];
+                int rankTier = response["data"]["currenttier"];
                 //Send Points to Function that changes the UI
-                SetChangesToOverlay(points).GetAwaiter();
+                SetChangesToOverlay(lastMatchPoints, pointsInRank, rankTier).GetAwaiter();
             }
+        
 
         }
 
@@ -188,52 +164,45 @@ namespace ValorantStreamOverlay
         private async Task<JObject> GetCompApiAsync()
         {
             
-            IRestClient compClient = new RestClient(new Uri($"https://pd.{region}.a.pvp.net/mmr/v1/players/{UserID}/competitiveupdates?startIndex=0&endIndex=20"));
-            RestRequest compRequest = new RestRequest(Method.GET);
+            RestClient compClient = new RestClient(new Uri("https://api.henrikdev.xyz/valorant/v1/mmr/"));
+            RestRequest compRequest = new RestRequest($"{region}/{riotname}/{riottag}");
 
-            compRequest.AddHeader("Authorization", $"Bearer {AccessToken}");
-            compRequest.AddHeader("X-Riot-Entitlements-JWT", EntitlementToken);
-            compRequest.AddHeader("X-Riot-ClientPlatform",
-                "ew0KCSJwbGF0Zm9ybVR5cGUiOiAiUEMiLA0KCSJwbGF0Zm9ybU9TIjogIldpbmRvd3MiLA0KCSJwbGF0Zm9ybU9TVmVyc2lvbiI6ICIxMC4wLjE5MDQyLjEuMjU2LjY0Yml0IiwNCgkicGxhdGZvcm1DaGlwc2V0IjogIlVua25vd24iDQp9");
+            
 
 
-            IRestResponse rankedResp = compClient.Get(compRequest);
+            RestResponse rankedResp = compClient.Get(compRequest);
 
             return rankedResp.IsSuccessful ? JsonConvert.DeserializeObject<JObject>(rankedResp.Content) : null;
         }
 
 
-        private async Task SetChangesToOverlay(int[] pointchange)
+        private async Task SetChangesToOverlay(int lastMatch, int pointsInRank, int rankTier)
         {
             Label[] rankChanges = { ValorantOver.recentGame1, ValorantOver.recentGame2, ValorantOver.recentGame3 };
-            for (int i = 0; i < pointchange.Length; i++)
-            {
-                // neg num represents decrease in pts
-                if (pointchange[i] < 0)
-                {
-                    //In the case of a demotion or a loss
-                    pointchange[i] *= -1;
-                    string change;
-                    change = pointchange[i] <= 9 ? $"0{pointchange[i]}" : pointchange[i].ToString();
-                    
-                    rankChanges[i].ForeColor = Color.Red;
-                    rankChanges[i].Text = $"-{change}";
-                }
-                else if (pointchange[i] > 0)
-                {
-                    //int checker = pointchange[i] * -1;
-                    string change;
-                    change = pointchange[i] <= 9 ? $"0{pointchange[i]}" : pointchange[i].ToString();
 
-                    rankChanges[i].ForeColor = Color.LimeGreen;
-                    rankChanges[i].Text = $"+{change}";
-                }
-                else
-                {
-                    rankChanges[i].ForeColor = Color.SlateGray;
-                    rankChanges[i].Text = "0";
-                }
+            Console.WriteLine(int.Parse(rankChanges[0].Text.Replace("+", "").Replace("-", "")));
+            Console.WriteLine(lastMatch);
+            
+            if (lastMatch != int.Parse(rankChanges[0].Text.Replace("+", "").Replace("-", "")))
+            {
+                rankChanges[2].ForeColor = rankChanges[1].ForeColor;
+                rankChanges[2].Text = rankChanges[1].Text;
+                rankChanges[1].ForeColor = rankChanges[0].ForeColor;
+                rankChanges[1].Text = rankChanges[0].Text;
             }
+
+            if (lastMatch < 0)
+            {
+                lastMatch *= -1;
+                rankChanges[0].ForeColor = Color.Red;
+                rankChanges[0].Text = $"-{lastMatch}";
+            }
+            else
+            {
+                rankChanges[0].ForeColor = Color.LimeGreen;
+                rankChanges[0].Text = $"+{lastMatch}";
+            }
+            
         }
 
 
@@ -271,7 +240,7 @@ namespace ValorantStreamOverlay
         private void relogTimer_Tick(object sender, EventArgs e)
         {
             pointTimer.Stop();
-            RiotGamesLogin();
+            UpdateToLatestGames().Wait();
             pointTimer.Start();
         }
 

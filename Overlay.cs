@@ -33,7 +33,7 @@ namespace ValorantStreamOverlay
             rankingLabel.Parent = backgroundPic;
             rankingLabel.BackColor = Color.Transparent;
             PrivateFontCollection pfc = new PrivateFontCollection();
-            pfc.AddFontFile(Path.Combine(Directory.GetCurrentDirectory(), "references", "Anton.ttf"));
+            pfc.AddFontFile(Path.Combine(Directory.GetCurrentDirectory(), "references", "Anton-Regular.ttf"));
             
             
             //On Load, Set backing and Fonts to labels displaying Rank changes.

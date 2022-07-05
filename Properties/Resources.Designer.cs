@@ -331,6 +331,33 @@ namespace ValorantStreamOverlay.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {C:\Users\demon\Downloads\ValorantStreamOverlay-main\ValorantStreamOverlay-main\Resources\TX_CompetitiveTier_Large_25.png}.
+        /// </summary>
+        internal static string TX_CompetitiveTier_Large_25 {
+            get {
+                return ResourceManager.GetString("TX_CompetitiveTier_Large_25", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {C:\Users\demon\Downloads\ValorantStreamOverlay-main\ValorantStreamOverlay-main\Resources\TX_CompetitiveTier_Large_26.png}.
+        /// </summary>
+        internal static string TX_CompetitiveTIer_Large_26 {
+            get {
+                return ResourceManager.GetString("TX_CompetitiveTIer_Large_26", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {C:\Users\demon\Downloads\ValorantStreamOverlay-main\ValorantStreamOverlay-main\Resources\TX_CompetitiveTier_Large_27.png}.
+        /// </summary>
+        internal static string TX_CompetitiveTier_Large_27 {
+            get {
+                return ResourceManager.GetString("TX_CompetitiveTier_Large_27", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap TX_CompetitiveTier_Large_3 {
