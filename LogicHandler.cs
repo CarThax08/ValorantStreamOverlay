@@ -179,9 +179,7 @@ namespace ValorantStreamOverlay
         private async Task SetChangesToOverlay(int lastMatch, int pointsInRank, int rankTier)
         {
             Label[] rankChanges = { ValorantOver.recentGame1, ValorantOver.recentGame2, ValorantOver.recentGame3 };
-
-            Console.WriteLine(int.Parse(rankChanges[0].Text.Replace("+", "").Replace("-", "")));
-            Console.WriteLine(lastMatch);
+            
             
             if (lastMatch != int.Parse(rankChanges[0].Text.Replace("+", "").Replace("-", "")))
             {
